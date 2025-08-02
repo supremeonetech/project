@@ -26,10 +26,22 @@ const products = [
   }
 ];
 
-const productSelect = document.getElementById("productName");
-products.forEach(product => {
-  const option = document.createElement("option");
-  option.value = product.name;
-  option.textContent = product.name;
-  productSelect.appendChild(option);
+window.addEventListener("DOMContentLoaded", () => {
+  const select = document.getElementById("productName");
+  if (select) {
+    products.forEach(product => {
+      const option = document.createElement("option");
+      option.value = product.id;
+      option.textContent = product.name;
+      select.appendChild(option);
+    });
+  }
+
+  const counterDisplay = document.getElementById("reviewCounter");
+  if (counterDisplay) {
+    let count = Number(localStorage.getItem("reviewCount")) || 0;
+    count++;
+    localStorage.setItem("reviewCount", count);
+    counterDisplay.textContent = `You have submitted ${count} review(s).`;
+  }
 });
